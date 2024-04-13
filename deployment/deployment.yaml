@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ai-chatflask-gpt-deployment
+  labels:
+    app: ai-chatflask-gpt
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ai-chatflask-gpt
+  template:
+    metadata:
+      labels:
+        app: ai-chatflask-gpt
+    spec:
+      containers:
+      - name: ai-chatflask-gpt
+        image: [your-image]
+        ports:
+        - containerPort: 8000
+        env:
+        - name: OPENAI_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: ai-chatflask-gpt
+              key: OPENAI_API_KEY
